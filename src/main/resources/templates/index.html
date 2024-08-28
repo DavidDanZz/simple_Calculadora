@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Calculadora Crua</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+        }
+        .calculator {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .calculator input[type="number"] {
+            width: 100px;
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .calculator select, .calculator button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .resultado {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="calculator">
+    <form th:action="@{/calcular}" method="post">
+        <input type="number" name="num1" placeholder="Número 1" required>
+        <select name="operacao" required>
+            <option value="somar">+</option>
+            <option value="subtrair">-</option>
+            <option value="multiplicar">*</option>
+            <option value="dividir">/</option>
+        </select>
+        <input type="number" name="num2" placeholder="Número 2" required>
+        <button type="submit">Calcular</button>
+    </form>
+
+    <div class="resultado" th:if="${resultado != null}">
+        Resultado: <span th:text="${resultado}"></span>
+    </div>
+
+    <div class="erro" th:if="${erro != null}">
+        <span th:text="${erro}"></span>
+    </div>
+</div>
+</body>
+</html>
